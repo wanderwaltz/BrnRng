@@ -19,7 +19,7 @@ struct Question : Printable {
         text = node.extractTextAndImages()
         if let maybeHandout = node.searchWithXPathQuery("//div[@class='razdatka']"){
             if maybeHandout.count > 0 {
-                let definitelyHandout = maybeHandout[0] as TFHppleElement
+                let definitelyHandout = maybeHandout[0] as! TFHppleElement
                 handout = definitelyHandout.extractTextAndImages()
             }
         }
@@ -29,10 +29,10 @@ struct Question : Printable {
                 if let prepareName = component.searchWithXPathQuery("//strong") {
                     if prepareName.count > 0 {
                         if let name: AnyObject = prepareName[0] as? TFHppleElement {
-                            if name.text! == "Ответ:" {
+                            if name.firstTextChild().content == "Ответ:" {
                                 answer = component.extractTextAndImages()
                             }
-                            else if name.text! == "Комментарий:" {
+                            else if name.firstTextChild().content == "Комментарий:" {
                                 comment = component.extractTextAndImages()
                             }
                         }

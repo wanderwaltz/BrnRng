@@ -11,16 +11,16 @@ import UIKit
 class ImageViewController: UIViewController {
 
     @IBAction func back(AnyObject) {
-        self.dismissModalViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBOutlet var imageView: UIImageView
+    @IBOutlet var imageView: UIImageView?
 
     var imageUrl: NSURL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.setImageWithURL(imageUrl)
+        self.imageView!.setImageWithURL(imageUrl)
     }
 
 }

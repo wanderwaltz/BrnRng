@@ -20,32 +20,32 @@ class QuestionViewController: UICollectionViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.layout(self.collectionView.bounds.size)
+        self.layout(self.collectionView!.bounds.size)
     }
 
     override func viewDidAppear(animated: Bool) {
-        self.collectionView.reloadData()
+        self.collectionView!.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.questionBase.questions.count
     }
 
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("question", forIndexPath: indexPath) as QuestionCell
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("question", forIndexPath: indexPath) as! QuestionCell
         cell.fillWithQuestion(self.questionBase.questions[indexPath.item])
         cell.isLast = self.questionBase.questions.count == indexPath.item + 1
         cell.isFirst = indexPath.item == 0
         cell.goBack = ({
-            self.dismissModalViewControllerAnimated(true)
+            self.dismissViewControllerAnimated(true, completion: nil)
             })
         cell.goNext = ({
             self.currentIndex = self.currentIndex + 1
@@ -59,28 +59,28 @@ class QuestionViewController: UICollectionViewController, UIScrollViewDelegate {
     }
 
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        let size = self.collectionView.bounds.size
+        let size = self.collectionView!.bounds.size
         self.layout(CGSize(width: size.height, height: size.width))
     }
 
     func scrollToCurrentIndex() {
-        self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: self.currentIndex, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
+        self.collectionView!.scrollToItemAtIndexPath(NSIndexPath(forItem: self.currentIndex, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
     }
 
     func layout(size: CGSize) {
-        let layout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+        let layout = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = size
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.invalidateLayout()
-        self.collectionView.contentSize = CGSizeMake(size.width * CGFloat(questionBase.questions.count), size.height)
+        self.collectionView!.contentSize = CGSizeMake(size.width * CGFloat(questionBase.questions.count), size.height)
     }
 
-    override func scrollViewDidEndDecelerating(scrollView: UIScrollView!) {
-        self.currentIndex = Int(scrollView.contentOffset.x / self.collectionView.frame.size.width)
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        self.currentIndex = Int(scrollView.contentOffset.x / self.collectionView!.frame.size.width)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let button = sender as? UIButton {
             let imageUrl = self.questionBase.questions[self.currentIndex].text.1
             if let vc = segue.destinationViewController as? ImageViewController {

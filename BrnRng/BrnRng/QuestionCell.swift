@@ -33,58 +33,58 @@ class QuestionCell: UICollectionViewCell {
     
     var imageHeight: CGFloat = 0.0
 
-    @IBOutlet var textLabel: UILabel
-    @IBOutlet var textImageButton: UIButton
-    @IBOutlet var textImage: UIImageView
+    @IBOutlet var textLabel: UILabel!
+    @IBOutlet var textImageButton: UIButton!
+    @IBOutlet var textImage: UIImageView!
 
-    @IBOutlet var handoutLabel: UILabel
-    @IBOutlet var handoutImageButton: UIButton
+    @IBOutlet var handoutLabel: UILabel!
+    @IBOutlet var handoutImageButton: UIButton!
 
-    @IBOutlet var answerLabel: UILabel
-    @IBOutlet var answerImageButton: UIButton
+    @IBOutlet var answerLabel: UILabel!
+    @IBOutlet var answerImageButton: UIButton!
 
-    @IBOutlet var commentLabel: UILabel
+    @IBOutlet var commentLabel: UILabel!
 
-    @IBOutlet var showAnswerButton: UIButton
+    @IBOutlet var showAnswerButton: UIButton!
 
-    @IBOutlet var previousButton: UIButton
-    @IBOutlet var nextButton: UIButton
+    @IBOutlet var previousButton: UIButton!
+    @IBOutlet var nextButton: UIButton!
 
-    @IBOutlet var widthConstraint: NSLayoutConstraint
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
 
-    @IBOutlet var textHeightConstraint: NSLayoutConstraint
-    @IBOutlet var textImageHeightConstraint: NSLayoutConstraint
+    @IBOutlet var textHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var textImageHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet var handoutHeightConstraint: NSLayoutConstraint
-    @IBOutlet var handoutImageHeightConstraint: NSLayoutConstraint
+    @IBOutlet var handoutHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var handoutImageHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet var answerHeightConstraint: NSLayoutConstraint
-    @IBOutlet var answerImageHeightConstraint: NSLayoutConstraint
+    @IBOutlet var answerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var answerImageHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet var commentHeightConstraint: NSLayoutConstraint
+    @IBOutlet var commentHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet var showAnswerHeightConstraint: NSLayoutConstraint
-    @IBOutlet var leftMarginConstraint: NSLayoutConstraint
-    @IBOutlet var rightMarginConstraint: NSLayoutConstraint
-    @IBOutlet var answerCommentConstraint: NSLayoutConstraint
+    @IBOutlet var showAnswerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var leftMarginConstraint: NSLayoutConstraint!
+    @IBOutlet var rightMarginConstraint: NSLayoutConstraint!
+    @IBOutlet var answerCommentConstraint: NSLayoutConstraint!
 
-    @IBOutlet var scrollContentView: UIView
-    @IBOutlet var scrollView: UIScrollView
+    @IBOutlet var scrollContentView: UIView!
+    @IBOutlet var scrollView: UIScrollView!
 
 
     @IBAction func back(AnyObject) {
-        if self.goBack {
+        if (self.goBack != nil) {
             self.goBack!()
         }
     }
     @IBAction func next(AnyObject) {
-        if self.goNext {
+        if (self.goNext != nil) {
             self.goNext!()
         }
     }
 
     @IBAction func previous(AnyObject) {
-        if self.goPrevious {
+        if (self.goPrevious != nil) {
             self.goPrevious!()
         }
     }
@@ -127,17 +127,17 @@ class QuestionCell: UICollectionViewCell {
         self.scrollContentView.setNeedsLayout()
         self.scrollContentView.layoutIfNeeded()
 
-        self.textLabel.frame.size.height = CGFLOAT_MAX
+        self.textLabel.frame.size.height = CGFloat.max
         let tsize = self.textLabel.sizeThatFits(textLabel.frame.size)
         self.textHeightConstraint.constant = tsize.height
 
         self.layoutImages()
 
-        self.answerLabel.frame.size.height = CGFLOAT_MAX
+        self.answerLabel.frame.size.height = CGFloat.max
         let asize = self.answerLabel.sizeThatFits(textLabel.frame.size)
         self.answerHeightConstraint.constant = asize.height
 
-        self.commentLabel.frame.size.height = CGFLOAT_MAX
+        self.commentLabel.frame.size.height = CGFloat.max
         let csize = self.commentLabel.sizeThatFits(textLabel.frame.size)
         self.commentHeightConstraint.constant = csize.height
 
