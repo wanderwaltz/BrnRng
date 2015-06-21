@@ -97,8 +97,8 @@ class QuestionCell: UICollectionViewCell {
 // (UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     func fillWithQuestion(question: Question) {
         self.textLabel.text = question.text.0
-        self.textImage.setImageWithURL(question.text.1, completed:{ (image: UIImage!,
-            error: NSError!, cacheType: SDImageCacheType) in
+        self.textImage.sd_setImageWithURL(question.text.1, completed:{ (image: UIImage!,
+            error: NSError!, cacheType: SDImageCacheType, imageURL: NSURL!) in
                 self.layoutImages()
             })
         self.answerLabel.text = question.answer.0
@@ -110,7 +110,7 @@ class QuestionCell: UICollectionViewCell {
         self.showAnswerButton.alpha = 1
         self.isFirst = false
         self.isLast = false
-        self.textImage.setImageWithURL(nil)
+        self.textImage.sd_setImageWithURL(nil)
     }
 
     override func awakeFromNib() {

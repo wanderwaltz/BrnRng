@@ -20,7 +20,7 @@ class ImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView!.setImageWithURL(imageUrl)
+        self.imageView!.sd_setImageWithURL(imageUrl)
     }
 
 }
